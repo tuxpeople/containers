@@ -11,11 +11,10 @@ RUN \
     musl-dev \
     linux-headers \
   && git clone https://github.com/nwalke/tautulli-exporter.git . \
-  && if [ -n "$VERSION" ]; then \
-    NUMBER_COMMITS_TO_REVERT=$(( $(git rev-list --count --first-parent HEAD) - $(echo "${VERSION}" | cut -d "." -f3) )); \
-    git checkout "master~$NUMBER_COMMITS_TO_REVERT"; \
+  && if [ -n "${VERSION}" ]; then \
+    git checkout tags/${VERSION} \
   fi \
-  && CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "-w -s -X main.version=$VERSION" -o /bin/tautulli_exporter
+  && CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "-w -s -X main.version=${VERSION}" -o /bin/tautulli_exporter
 
 FROM alpine:3.18.0
 WORKDIR /app/
