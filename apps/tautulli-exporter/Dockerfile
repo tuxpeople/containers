@@ -12,6 +12,7 @@ RUN \
     linux-headers \
   && git clone https://github.com/nwalke/tautulli-exporter.git . \
   && if [ -n "${VERSION}" ]; then \
+  git fetch --all --tags; \
   git checkout tags/${VERSION}; \
   fi \
   && CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "-w -s -X main.version=${VERSION}" -o /bin/tautulli_exporter
