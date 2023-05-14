@@ -14,7 +14,7 @@ RUN \
 FROM python:3.7-alpine
 
 WORKDIR /opt/vmware_exporter/
-COPY . /opt/vmware_exporter/
+COPY ./vmware_exporter/ /opt/vmware_exporter/
 # hadolint ignore=DL3018,DL3017,SC2086
 RUN set -x; buildDeps="gcc python3-dev musl-dev libffi-dev openssl openssl-dev rust cargo" \
  && apk add --no-cache --update $buildDeps \
