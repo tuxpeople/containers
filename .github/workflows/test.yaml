@@ -29,12 +29,25 @@ jobs:
             echo "$file was changed"
           done
 
-  read-yaml:
+  prep-matrix:
     needs: [get-changed-images]
+    runs-on: ubuntu-latest
+    name: prep-matrix
+    if: ${{ needs.get-changed-images.outputs.addedOrModified == 'true' }}
+    outputs:
+      containermatrix: ${{ steps.matrix.outputs.containermatrix }}
+    steps:
+      - id: matrix
+        run: |
+          ARRAY=$(echo $${{ needs.get-changed-images.outputs.addedOrModifiedImages }} | tr "," "\n")
+          echo "containermatrix=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${ARRAY[@]}")" >> $GITHUB_OUTPUT
+
+  read-yaml:
+    needs: [prep-matrix]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        container: ${{ needs.get-changed-images.outputs.addedOrModifiedImages }}
+        container: ${{ fromJson(needs.prep-matrix.outputs.containermatrix) }}
     name: Test read-yaml
     steps:
       - uses: actions/checkout@v1
