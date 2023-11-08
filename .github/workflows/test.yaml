@@ -15,6 +15,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  get-changed-images:
+    uses: tuxpeople/containers/.github/workflows/get-changed-images.yaml@main
+
+  list-build-images:
+    needs: [get-changed-images]
+    runs-on: ubuntu-latest
+    name: list-build-images
+    if: ${{ needs.get-changed-images.outputs.addedOrModified == 'true' }}
+    steps:
+      - run: |
+          for file in ${{ needs.get-changed-images.outputs.addedOrModifiedImages }}; do
+            echo "$file was changed"
+          done
+
   changed_files:
     runs-on: ubuntu-latest
     name: Test changed-files
