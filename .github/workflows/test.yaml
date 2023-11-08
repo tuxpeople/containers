@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        container: ${{ fromJson(needs.prep-matrix.outputs.containermatrix) }}
+        container: ${{ needs.prep-matrix.outputs.containermatrix }}
     name: Test read-yaml
     steps:
       - uses: actions/checkout@v1
