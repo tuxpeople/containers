@@ -29,22 +29,45 @@ jobs:
             echo "$file was changed"
           done
 
-  changed_files:
+  read-yaml:
+    needs: [get-changed-images]
     runs-on: ubuntu-latest
-    name: Test changed-files
+    strategy:
+      matrix:
+        container: ${{ needs.get-changed-images.outputs.addedOrModifiedImages }}
+    name: Test read-yaml
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+      - uses: actions/checkout@v1
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v40
+      - name: read-yaml-file
+        uses: pietrobolcato/action-read-yaml@1.1.0
+        id: read_metadata
         with:
-          dir_names: "true"
+          config: ${{ github.workspace }}/apps/${{ matrix.container }}/metadata.yaml
 
-      - name: List all changed files
+      - name: use-yaml-file
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
+          echo app name: ${{ steps.read_metadata.outputs['app'] }}
+          echo is it a base image: ${{ steps.read_metadata.outputs['base'] }}
+          echo first channel name: ${{ steps.read_metadata.outputs['channels.0.name'] }}
+          echo first channel plattforms: ${{ steps.read_metadata.outputs['channels.0.plattforms'] }}
+
+  # changed_files:
+  #   runs-on: ubuntu-latest
+  #   name: Test changed-files
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         fetch-depth: 0  # OR "2" -> To retrieve the preceding commit.
+
+  #     - name: Get changed files
+  #       id: changed-files
+  #       uses: tj-actions/changed-files@v40
+  #       with:
+  #         dir_names: "true"
+
+  #     - name: List all changed files
+  #       run: |
+  #         for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+  #           echo "$file was changed"
+  #         done
