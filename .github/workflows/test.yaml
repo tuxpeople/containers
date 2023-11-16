@@ -50,7 +50,7 @@ jobs:
         container: ${{ needs.prep-matrix.outputs.containermatrix }}
     name: Test read-yaml
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
 
       - name: read-yaml-file
         uses: pietrobolcato/action-read-yaml@1.1.0
