@@ -39,7 +39,7 @@ jobs:
     steps:
       - id: matrix
         run: |
-          ARRAY=$(echo $${{ needs.get-changed-images.outputs.addedOrModifiedImages }} | tr "," "\n")
+          ARRAY=$(echo ${{ needs.get-changed-images.outputs.addedOrModifiedImages }} | tr "," "\n")
           echo "containermatrix=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${ARRAY[@]}")" >> $GITHUB_OUTPUT
 
   read-yaml:
@@ -47,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        container: ${{ needs.prep-matrix.outputs.containermatrix }}
+        container: ${{ fromJson(needs.prep-matrix.outputs.containermatrix) }}
     name: Test read-yaml
     steps:
       - uses: actions/checkout@v1
