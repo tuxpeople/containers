@@ -67,7 +67,7 @@ Each Image will be built with a `rolling` tag, along with tags specific to it's 
 
 Container | Channel | Image | Latest Tags
 --- | --- | --- | ---
-[alertmanager-discord](https://github.com/tuxpeople/containers/pkgs/container/alertmanager-discord) | main | ghcr.io/tuxpeople/alertmanager-discord |![null](https://img.shields.io/badge/null-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
+[alertmanager-discord](https://github.com/tuxpeople/containers/pkgs/container/alertmanager-discord) | main | ghcr.io/tuxpeople/alertmanager-discord |![89ef841](https://img.shields.io/badge/89ef841-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 [ansible](https://github.com/tuxpeople/containers/pkgs/container/ansible) | main | ghcr.io/tuxpeople/ansible |![9.2.0](https://img.shields.io/badge/9.2.0-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 [buildah_rootless](https://github.com/tuxpeople/containers/pkgs/container/buildah_rootless) | main | ghcr.io/tuxpeople/buildah_rootless |![1.34.0](https://img.shields.io/badge/1.34.0-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 [droopy](https://github.com/tuxpeople/containers/pkgs/container/droopy) | main | ghcr.io/tuxpeople/droopy |![1-45](https://img.shields.io/badge/1--45-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
