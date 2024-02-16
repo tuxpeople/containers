@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version="$(grep FROM './apps/droopy/Dockerfile' | cut -d ':' -f2)"
+version=$(curl -sX GET https://api.github.com/repos/gurnec/Droopy/commits/master | jq -r .sha | cut -c1-7 2>/dev/null)
 version="${version#*v}"
 version="${version#*release-}"
 printf "%s" "${version}"
