@@ -1,6 +1,7 @@
 ---
 app: rtfctl
 base: false
+semantic_versioning: true
 channels:
   - name: main
     platforms: ["linux/amd64"]
