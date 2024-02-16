@@ -1,7 +1,7 @@
 ---
 app: droopy
 base: false
-semantic_versioning: true
+semantic_versioning: false
 channels:
   - name: main
     platforms: ["linux/amd64", "linux/arm64"]
