@@ -1,3 +1,0 @@
-feedgen==1.0.0
-feedparser==6.0.11
-timeloop==1.0.2
