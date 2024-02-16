@@ -2,7 +2,7 @@ FROM registry.access.redhat.com/ubi9/python-311:1-45
 
 USER 1001
 
-COPY root /
+COPY ./apps/droopy/root/ /
 ADD --chmod=755 --chown=1001 https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-security/droopy /app
 
 WORKDIR /app
