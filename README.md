@@ -73,9 +73,10 @@ Container | Channel | Image | Latest Tags
 [droopy](https://github.com/tuxpeople/containers/pkgs/container/droopy) | main | ghcr.io/tuxpeople/droopy |![1-45](https://img.shields.io/badge/1--45-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 [feeder](https://github.com/tuxpeople/containers/pkgs/container/feeder) | main | ghcr.io/tuxpeople/feeder |![0.0.1](https://img.shields.io/badge/0.0.1-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 [image-syncer](https://github.com/tuxpeople/containers/pkgs/container/image-syncer) | main | ghcr.io/tuxpeople/image-syncer |![1.5.4](https://img.shields.io/badge/1.5.4-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
-[kubernetes-kubectl](https://github.com/tuxpeople/containers/pkgs/container/kubernetes-kubectl) | kubectl | ghcr.io/tuxpeople/kubernetes-kubectl |![1.29.2](https://img.shields.io/badge/1.29.2-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
+[kubernetes-main]() | main | ghcr.io/tuxpeople/kubernetes-main |
 [rtfctl](https://github.com/tuxpeople/containers/pkgs/container/rtfctl) | main | ghcr.io/tuxpeople/rtfctl |![1.0.29](https://img.shields.io/badge/1.0.29-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 [tautulli-exporter](https://github.com/tuxpeople/containers/pkgs/container/tautulli-exporter) | main | ghcr.io/tuxpeople/tautulli-exporter |![0.1.0](https://img.shields.io/badge/0.1.0-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
+[tcp-proxy]() | main | ghcr.io/tuxpeople/tcp-proxy |
 [vmware_exporter](https://github.com/tuxpeople/containers/pkgs/container/vmware_exporter) | main | ghcr.io/tuxpeople/vmware_exporter |![0.18.4](https://img.shields.io/badge/0.18.4-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 
 
