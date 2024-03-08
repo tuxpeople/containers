@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # hadolint ignore=DL3008,DL3009
 RUN apt-get update && \
-  apt-get upgrade -y; && \
+  apt-get upgrade -y && \
   useradd -ms /bin/bash ubuntu
 
 USER ubuntu
