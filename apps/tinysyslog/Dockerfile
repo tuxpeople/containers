@@ -5,8 +5,6 @@ ARG BUILDPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
 
-WORKDIR /build
-
 # hadolint ignore=DL4006,DL3018,DL3003,SC2164
 RUN \
   apk add --no-cache git; \
@@ -16,17 +14,12 @@ RUN \
   git checkout tags/v${VERSION}); \
   fi
 
-COPY /upstream/go.mod .
-COPY /upstream/go.sum .
+WORKDIR /upstream
 
-RUN go mod download
-
-COPY /upstream/ ./
-
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build ./cmd/tinysyslogd
+RUN go mod download; CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build ./cmd/tinysyslogd
 
 FROM scratch
-COPY --from=builder /build/tinysyslogd /tinysyslogd
+COPY --from=builder /upstream/tinysyslogd /tinysyslogd
 
 EXPOSE 5140 5140/udp
 
