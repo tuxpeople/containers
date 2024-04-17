@@ -16,9 +16,12 @@ RUN \
   git checkout tags/v${VERSION}); \
   fi
 
-WORKDIR /upstream
+COPY /upstream/go.mod .
+COPY /upstream/go.sum .
 
 RUN go mod download
+
+COPY /upstream/ ./
 
 RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build ./cmd/tinysyslogd
 
