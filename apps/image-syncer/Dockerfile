@@ -15,7 +15,7 @@ WORKDIR /go/src/github.com/AliyunContainerService/image-syncer
 RUN wget -nv -O - https://github.com/AliyunContainerService/image-syncer/archive/${UPSTREAM_VERSION}.tar.gz | tar -xz --strip-components=1 && \
     CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} make
 
-FROM alpine:3.20.0
+FROM alpine:3.20.1
 WORKDIR /app/
 # hadolint ignore=DL3018,DL3017
 RUN apk --no-cache upgrade && \
