@@ -1,4 +1,4 @@
-FROM alpine:3.20.1
+FROM docker.io/library/alpine:3.20.1
 
 ARG VERSION
 ENV ENV_VERSION=${VERSION}
