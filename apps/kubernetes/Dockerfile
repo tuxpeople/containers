@@ -13,7 +13,7 @@ RUN \
     curl -fsSL -o /usr/local/bin/kubectl "https://dl.k8s.io/release/v${VERSION}/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/local/bin/kubectl
 
-USER kah
+#USER kah
 CMD [ "/usr/local/bin/kubectl" ]
 
 LABEL org.opencontainers.image.source="https://github.com/kubernetes/kubectl"
