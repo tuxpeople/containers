@@ -17,3 +17,4 @@ RUN \
 CMD [ "/usr/local/bin/kubectl" ]
 
 LABEL org.opencontainers.image.source="https://github.com/kubernetes/kubectl"
+# trigger
