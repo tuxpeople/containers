@@ -16,10 +16,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "description": "Update ARG versions of services",
+      "description": "Update versions of services",
       "managerFilePatterns": [
-        "/(^|/|\\.)Dockerfile$/",
-        "/(^|/)Dockerfile\\.[^/]*$/",
         "/(^|/|\\.)latest$/",
         "/(^|/)latest\\.[^/]*$/"
       ],
