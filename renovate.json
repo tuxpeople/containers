@@ -21,8 +21,8 @@
       "managerFilePatterns": [
         "/(^|/|\\.)Dockerfile$/",
         "/(^|/)Dockerfile\\.[^/]*$/",
-        "/(^|/|\\.)latest.sh$/",
-        "/(^|/)latest.sh\\.[^/]*$/"
+        "/(^|/|\\.)latest$/",
+        "/(^|/)latest\\.[^/]*$/"
       ],
       "matchStrings": [
         "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sARG .*?_VERSION=(?<currentValue>.*)\\s"
