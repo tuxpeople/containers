@@ -13,5 +13,21 @@
   "suppressNotifications": [
     "prEditedNotification",
     "prIgnoreNotification"
+  ],
+  "regexManagers": [
+    {
+      "customType": "regex",
+      "description": "Update ARG versions of services",
+      "fileMatch": [
+        "(^|/|\\.)Dockerfile$",
+        "(^|/)Dockerfile\\.[^/]*$",
+        "(^|/|\\.)latest.sh$",
+        "(^|/)latest.sh\\.[^/]*$"
+      ],
+      "matchStrings": [
+        "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sARG .*?_VERSION=(?<currentValue>.*)\\s"
+      ],
+      "versioningTemplate": "docker"
+    }
   ]
 }
