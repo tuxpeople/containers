@@ -1,4 +1,4 @@
-FROM docker.io/library/alpine:3.20.2
+FROM docker.io/library/alpine:3.22.0
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache bash socat
