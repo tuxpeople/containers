@@ -8,7 +8,7 @@
     ":semanticCommits"
   ],
   "requireConfig": "optional",
-  "includeForks": true,
+  "forkProcessing": "enabled",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": [
     "prEditedNotification",
