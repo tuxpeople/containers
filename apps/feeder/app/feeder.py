@@ -100,7 +100,7 @@ def update_feeds():
       for tag in item.tags:
         fe.category(term=tag.term)
     if('content' in item):
-      fe.content(content=content.value, type='html')
+      fe.content(content=item['content'][0].value, type='html')
   fg.atom_file('feed.xml')
   logger.info('Finished feed generation')
 

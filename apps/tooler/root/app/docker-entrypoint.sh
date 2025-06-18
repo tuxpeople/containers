@@ -67,7 +67,7 @@ UPDATE_TRUE_COLOR=`yq e ".settings.colors.update_true" ${CONFIGFILE}`
 cat ${TEMPLATEDIR}/header.html > ${OUTPUTFILE}
 
 
-# get the number of Github Releases we need to loop trough
+# get the number of Github Releases we need to loop through
 GITHUB_NO=`yq e ".github | length - 1" ${CONFIGFILE}`
 
 # set loop counter to 0
@@ -85,7 +85,7 @@ do
   # get latest version from GitHub
   LATEST_VERSION=`curl --silent -qI https://github.com/$ORG/$REPO/releases/latest | grep ^location | tr -d '\r' |  cut -d'/' -f8-`
 
-  # URL encode Version, as some people (eg. kustomize) do slahes into theire versions!
+  # URL encode Version, as some people (eg. kustomize) do slashes into their versions!
   CLEAN_LATEST_VERSION=$(urlencode_grouped_case $LATEST_VERSION)
 
   # Load filter from config file and replace placeholders
@@ -121,7 +121,7 @@ do
 done
 
 
-# get the number of VSCode Extensions we need to loop trough
+# get the number of VSCode Extensions we need to loop through
 VSCODE_NO=`yq e ".vscode | length - 1" ${CONFIGFILE}`
 
 # set loop counter to 0

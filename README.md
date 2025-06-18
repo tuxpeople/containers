@@ -88,7 +88,7 @@ Container | Channel | Image | Latest Tags
 ## Contributing
 
 1. Install [Docker](https://docs.docker.com/get-docker/), [Taskfile](https://taskfile.dev/) & [Cuelang](https://cuelang.org/)
-2. Get familiar with the structure of the repositroy
+2. Get familiar with the structure of the repository
 3. Find a similar application in the apps directory
 4. Copy & Paste an application and update the directory name
 5. Update `metadata.json`, `Dockerfile`, `ci/latest.sh`, `ci/goss.yaml` and make it suit the application build
