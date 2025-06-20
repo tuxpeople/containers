@@ -18,7 +18,7 @@ WORKDIR /upstream
 
 #RUN go mod init; go mod download; CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build github.com/IzakMarais/reporter/cmd/grafana-reporter
 
-RUN go install github.com/IzakMarais/reporter/cmd/grafana-reporter@${VERSION}
+RUN go install github.com/IzakMarais/reporter/cmd/grafana-reporter@v${VERSION}
 
 FROM leplusorg/latex
 
