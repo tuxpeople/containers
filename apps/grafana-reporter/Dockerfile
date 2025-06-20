@@ -16,11 +16,14 @@ RUN \
 
 WORKDIR /upstream
 
-RUN go mod init; go mod download; CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build ./cmd/grafana-reporter
+#RUN go mod init; go mod download; CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build github.com/IzakMarais/reporter/cmd/grafana-reporter
 
+RUN apk update && apk add make git
+RUN make build
 
 FROM leplusorg/latex
 
-COPY --from=builder /upstream/grafana-reporter /grafana-reporter
+#COPY --from=builder /upstream/grafana-reporter /grafana-reporter
+COPY --from=builder /go/bin/grafana-reporter /grafana-reporter
 
 ENTRYPOINT ["/grafana-reporter"]
