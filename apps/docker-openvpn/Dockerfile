@@ -25,8 +25,8 @@ EXPOSE 1194/udp
 
 CMD ["ovpn_run"]
 
-ADD ./apps/bin /usr/local/bin
+COPY ./apps/docker-openvpn/bin /usr/local/bin
 RUN chmod a+x /usr/local/bin/*
 
 # Add support for OTP authentication using a PAM module
-ADD ./apps/otp/openvpn /etc/pam.d/
+COPY ./apps/docker-openvpn/otp/openvpn /etc/pam.d/
