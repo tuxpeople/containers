@@ -26,5 +26,15 @@
       ],
       "versioningTemplate": "docker"
     }
+  ],
+  "packageRules": [
+    {
+      "description": "Automerge patch updates",
+      "matchUpdateTypes": [
+        "patch"
+      ],
+      "automerge": true,
+      "automergeType": "pr",
+    }
   ]
 }
