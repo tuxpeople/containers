@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/python-311:9.6-1750825406
+FROM registry.access.redhat.com/ubi9/python-311:9.6-1750969934
 
 USER 1001
 
