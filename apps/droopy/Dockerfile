@@ -1,8 +1,8 @@
 FROM registry.access.redhat.com/ubi9/python-311:9.6-1754318683
 
 # Install required utilities as root, then switch to non-root user
-RUN microdnf install -y file && \
-    microdnf clean all
+RUN dnf install -y file && \
+    dnf clean all
 
 USER 1001
 
