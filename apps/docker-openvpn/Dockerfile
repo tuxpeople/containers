@@ -27,9 +27,9 @@ CMD ["ovpn_run"]
 
 COPY ./apps/docker-openvpn/bin /usr/local/bin
 RUN chmod a+x /usr/local/bin/* && \
-    adduser -D -u 1001 openvpn
+    adduser -D -u 1001 -s /bin/sh appuser
 
 # Add support for OTP authentication using a PAM module
 COPY ./apps/docker-openvpn/otp/openvpn /etc/pam.d/
 
-USER openvpn
+USER appuser

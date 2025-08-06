@@ -22,7 +22,7 @@ RUN go install github.com/IzakMarais/reporter/cmd/grafana-reporter@v${VERSION}
 
 FROM leplusorg/latex
 
-RUN adduser -D -u 1001 reporter
+RUN useradd -u 1001 -m -s /bin/bash reporter
 
 #COPY --from=builder /upstream/grafana-reporter /grafana-reporter
 COPY --from=builder /go/bin/grafana-reporter /grafana-reporter
