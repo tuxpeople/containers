@@ -8,8 +8,8 @@ RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-secur
     [ -s /tmp/droopy ] && \
     [ $(wc -l < /tmp/droopy) -gt 10 ] && \
     chmod 755 /tmp/droopy && \
-    mv /tmp/droopy /app/droopy && \
-    chown -R 1001:1001 /app
+    chown -R 1001:1001 /app && \
+    mv /tmp/droopy /app/droopy
 
 USER 1001
 
