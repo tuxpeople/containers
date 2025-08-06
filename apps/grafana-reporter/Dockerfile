@@ -22,13 +22,9 @@ RUN go install github.com/IzakMarais/reporter/cmd/grafana-reporter@v${VERSION}
 
 FROM leplusorg/latex
 
-# Create user with fallback for different base systems
-RUN (useradd -u 1001 -m -s /bin/bash reporter 2>/dev/null || \
-     adduser -u 1001 -D -s /bin/bash reporter 2>/dev/null || \
-     adduser -u 1001 --disabled-password --gecos "" reporter)
+# Baseimage already has an unpriviledged user
 
 #COPY --from=builder /upstream/grafana-reporter /grafana-reporter
 COPY --from=builder /go/bin/grafana-reporter /grafana-reporter
 
-USER reporter
 ENTRYPOINT ["/grafana-reporter"]
