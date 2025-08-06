@@ -22,7 +22,10 @@ RUN go install github.com/IzakMarais/reporter/cmd/grafana-reporter@v${VERSION}
 
 FROM leplusorg/latex
 
+RUN adduser --uid 1001 --disabled-password --gecos "" reporter
+
 #COPY --from=builder /upstream/grafana-reporter /grafana-reporter
 COPY --from=builder /go/bin/grafana-reporter /grafana-reporter
 
+USER reporter
 ENTRYPOINT ["/grafana-reporter"]

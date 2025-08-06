@@ -18,7 +18,7 @@ RUN \
   go mod tidy; \
   CGO_ENABLED=0 go build -a -installsuffix cgo -ldflags "-w -s -X main.version=${VERSION}" -o /bin/tautulli_exporter
 
-FROM scratch
+FROM gcr.io/distroless/static-debian12:nonroot
 WORKDIR /app/
 COPY --from=builder /bin/tautulli_exporter .
 EXPOSE 9487/tcp

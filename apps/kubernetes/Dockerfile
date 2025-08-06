@@ -7,13 +7,14 @@ ARG TARGETARCH
 ENV TARGETARCH=${TARGETARCH:-amd64}
 
 #hadolint ignore=DL3018
-RUN apk add --no-cache ca-certificates openssl zip curl
+RUN apk add --no-cache ca-certificates openssl zip curl && \
+    adduser -D -u 1001 kubectl
 #hadolint ignore=DL3018,DL3059
 RUN \
     curl -fsSL -o /usr/local/bin/kubectl "https://dl.k8s.io/release/v${VERSION}/bin/linux/${TARGETARCH}/kubectl" \
     && chmod +x /usr/local/bin/kubectl
 
-#USER kah
+USER kubectl
 CMD [ "/usr/local/bin/kubectl" ]
 
 LABEL org.opencontainers.image.source="https://github.com/kubernetes/kubectl"

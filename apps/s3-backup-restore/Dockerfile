@@ -12,7 +12,7 @@ RUN \
 WORKDIR /upstream/s3-backup-restore
 RUN go build -o /bin/s3-backup-restore cmd/s3-backup-restore/main.go
 
-FROM gcr.io/distroless/static-debian12
-COPY --from=builder /bin/s3-backup-restore /s3-backup-restored
+FROM gcr.io/distroless/static-debian12:nonroot
+COPY --from=builder /bin/s3-backup-restore /bin/s3-backup-restore
 ENTRYPOINT ["/bin/s3-backup-restore"]
 CMD ["cron"]
