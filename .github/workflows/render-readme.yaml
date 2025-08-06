@@ -11,6 +11,9 @@ on:
         description: The private key of the GitHub App
         required: true
 
+permissions:
+  contents: write
+
 jobs:
   render-readme:
     name: Render README

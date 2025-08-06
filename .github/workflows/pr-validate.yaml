@@ -6,6 +6,9 @@ on:
     branches: ["main"]
     types: ["opened", "synchronize", "reopened"]
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.head_ref }}-pr-validate
   cancel-in-progress: true
@@ -21,7 +24,9 @@ jobs:
     needs: ["simple-checks", "get-changed-images"]
     if: ${{ needs.get-changed-images.outputs.addedOrModified == 'true' }}
     uses: tuxpeople/containers/.github/workflows/build-images.yaml@main
-    secrets: inherit
+    secrets:
+      BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
+      BOT_APP_PRIVATE_KEY: ${{ secrets.BOT_APP_PRIVATE_KEY }}
     with:
       appsToBuild: "${{ needs.get-changed-images.outputs.addedOrModifiedImages }}"
       pushImages: false
