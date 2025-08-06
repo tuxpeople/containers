@@ -1,6 +1,10 @@
 ---
 name: Release on Merge
 
+permissions:
+  contents: read
+  packages: write
+
 concurrency:
   group: container-release
   cancel-in-progress: false
@@ -27,7 +31,9 @@ jobs:
     needs: ["simple-checks", "get-changed-images"]
     if: ${{ needs.get-changed-images.outputs.addedOrModified == 'true' }}
     uses: tuxpeople/containers/.github/workflows/build-images.yaml@main
-    secrets: inherit
+    secrets:
+      BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
+      BOT_APP_PRIVATE_KEY: ${{ secrets.BOT_APP_PRIVATE_KEY }}
     with:
       appsToBuild: "${{ needs.get-changed-images.outputs.addedOrModifiedImages }}"
       pushImages: true
@@ -38,4 +44,6 @@ jobs:
     needs: build-images
     if: ${{ always() && needs.build-images.result != 'failure' }}
     uses: ./.github/workflows/render-readme.yaml
-    secrets: inherit
+    secrets:
+      BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
+      BOT_APP_PRIVATE_KEY: ${{ secrets.BOT_APP_PRIVATE_KEY }}
