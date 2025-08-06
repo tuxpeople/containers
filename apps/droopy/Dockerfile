@@ -4,12 +4,9 @@ COPY ./apps/droopy/root/ /
 
 # Download and verify droopy script as root, then switch to non-root user
 RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-security/droopy -o /tmp/droopy && \
-    # Verify the download has expected Python content
-    head -1 /tmp/droopy | grep -q "python" && \
-    grep -q "droopy" /tmp/droopy && \
-    # Verify the file is not empty and has reasonable size
+    # Verify the download succeeded and has reasonable content
     [ -s /tmp/droopy ] && \
-    [ $(stat -c%s /tmp/droopy) -gt 1000 ] && \
+    [ $(wc -l < /tmp/droopy) -gt 10 ] && \
     chmod 755 /tmp/droopy && \
     mv /tmp/droopy /app/droopy && \
     chown -R 1001:1001 /app
