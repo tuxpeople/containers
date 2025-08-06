@@ -2,7 +2,7 @@
 name: Release on Merge
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 concurrency:
