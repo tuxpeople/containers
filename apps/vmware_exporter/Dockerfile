@@ -21,10 +21,12 @@ RUN set -x; buildDeps="gcc python3-dev musl-dev libffi-dev openssl openssl-dev r
  && apk add --no-cache --update $buildDeps \
  && pip install --no-cache-dir -r requirements.txt . \
  && pip install --no-cache-dir requests \
- && apk del $buildDeps
+ && apk del $buildDeps \
+ && adduser -D -u 1001 vmware
 
 EXPOSE 9272
 
 ENV PYTHONUNBUFFERED=1
 
+USER vmware
 ENTRYPOINT ["/usr/local/bin/vmware_exporter"]

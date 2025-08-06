@@ -18,7 +18,7 @@ WORKDIR /upstream
 
 RUN go mod download; CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build ./cmd/tinysyslogd
 
-FROM scratch
+FROM gcr.io/distroless/static-debian12:nonroot
 COPY --from=builder /upstream/tinysyslogd /tinysyslogd
 
 EXPOSE 5140 5140/udp
