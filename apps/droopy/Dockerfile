@@ -1,10 +1,8 @@
 FROM registry.access.redhat.com/ubi9/python-311:9.6-1754318683
 
-USER 1001
-
 COPY ./apps/droopy/root/ /
 
-# Download and verify droopy script
+# Download and verify droopy script as root, then switch to non-root user
 RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-security/droopy -o /tmp/droopy && \
     # Verify the download has expected Python content
     head -1 /tmp/droopy | grep -q "python" && \
@@ -13,7 +11,10 @@ RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-secur
     [ -s /tmp/droopy ] && \
     [ $(stat -c%s /tmp/droopy) -gt 1000 ] && \
     chmod 755 /tmp/droopy && \
-    mv /tmp/droopy /app/droopy
+    mv /tmp/droopy /app/droopy && \
+    chown -R 1001:1001 /app
+
+USER 1001
 
 WORKDIR /app
 
