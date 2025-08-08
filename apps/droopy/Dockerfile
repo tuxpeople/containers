@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi9/python-311:9.6-1754318683
+FROM registry.access.redhat.com/ubi9/python-311:9.6-1754476896
 
 COPY ./apps/droopy/root/ /
 
