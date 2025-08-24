@@ -1,9 +1,10 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file, request
 import os
 from pathlib import Path
 
 app = Flask(__name__)
 IMAGE_FOLDER = os.environ.get('IMAGE_FOLDER', '/pictures')  # Aus Umgebungsvariable
+GALLERY_TITLE = os.environ.get('GALLERY_TITLE', 'Gallery')  # Titel aus Umgebungsvariable
 ALLOWED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.bmp'}
 
 # Prüfe ob der Bildordner existiert
@@ -22,17 +23,37 @@ def get_images(folder):
                 images.append(rel_path.replace('\\', '/'))
     return sorted(images)
 
+def sort_items(items, current_path, sort_by):
+    """Sortiert Bilder und Ordner nach verschiedenen Kriterien"""
+    def get_sort_key(item):
+        item_path = os.path.join(IMAGE_FOLDER, current_path, item) if current_path else os.path.join(IMAGE_FOLDER, item)
+
+        if sort_by == 'name':
+            return item.lower()
+        else:  # sort_by == 'date' (Standard)
+            try:
+                return os.path.getctime(item_path)  # Erstellungszeit
+            except (OSError, FileNotFoundError):
+                return 0
+
+    if sort_by == 'date':
+        return sorted(items, key=get_sort_key, reverse=True)  # Neueste zuerst
+    else:
+        return sorted(items, key=get_sort_key)  # Alphabetisch
+
 @app.route('/')
 @app.route('/<path:subfolder>')
 def gallery(subfolder=''):
+    sort_by = request.args.get('sort', 'date')  # Standard: nach Datum
+
     current_path = os.path.join(IMAGE_FOLDER, subfolder)
     if not os.path.exists(current_path):
         return "Ordner nicht gefunden", 404
-    
+
     # Bilder im aktuellen Ordner
     images = []
     subfolders = []
-    
+
     try:
         for item in os.listdir(current_path):
             item_path = os.path.join(current_path, item)
@@ -42,11 +63,19 @@ def gallery(subfolder=''):
                 images.append(os.path.join(subfolder, item).replace('\\', '/') if subfolder else item)
     except PermissionError:
         return "Keine Berechtigung", 403
-    
-    return render_template('gallery.html', 
-                         images=sorted(images), 
-                         subfolders=sorted(subfolders),
+
+    # Sortieren
+    images = sort_items([img.split('/')[-1] for img in images], subfolder, sort_by)
+    images = [os.path.join(subfolder, img).replace('\\', '/') if subfolder else img for img in images]
+
+    subfolders = sort_items(subfolders, subfolder, sort_by)
+
+    return render_template('gallery.html',
+                         images=images,
+                         subfolders=subfolders,
                          current_path=subfolder,
+                         current_sort=sort_by,
+                         gallery_title=GALLERY_TITLE,
                          parent_path='/'.join(subfolder.split('/')[:-1]) if subfolder and '/' in subfolder else '' if subfolder else None)
 
 @app.route('/image/<path:filename>')
