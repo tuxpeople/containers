@@ -1,0 +1,11 @@
+---
+app: bildergallerie
+base: false
+semantic_versioning: false
+channels:
+  - name: main
+    platforms: ["linux/amd64", "linux/arm64"]
+    stable: true
+    tests:
+      enabled: false
+      type: cli
