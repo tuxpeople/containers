@@ -1,0 +1,33 @@
+---
+file:
+  /usr/sbin/openvpn:
+    exists: true
+    mode: "0755"
+  /usr/local/bin/ovpn_run:
+    exists: true
+    mode: "0755"
+  /usr/local/bin/ovpn_genconfig:
+    exists: true
+    mode: "0755"
+  /usr/local/bin/ovpn_initpki:
+    exists: true
+    mode: "0755"
+  /etc/openvpn:
+    exists: true
+    filetype: directory
+
+command:
+  openvpn --version:
+    exit-status: 0
+    stdout:
+      - "OpenVPN"
+    timeout: 5000
+  iptables --version:
+    exit-status: 0
+    stdout:
+      - "iptables"
+    timeout: 5000
+
+user:
+  appuser:
+    exists: true

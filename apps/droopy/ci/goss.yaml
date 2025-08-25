@@ -1,0 +1,33 @@
+---
+file:
+  /app/droopy:
+    exists: true
+    mode: "0755"
+  /app:
+    exists: true
+    filetype: directory
+    owner: "droopy"
+  /uploads:
+    exists: true
+    filetype: directory
+    owner: "droopy"
+
+command:
+  python3 --version:
+    exit-status: 0
+    stdout:
+      - "Python 3"
+    timeout: 5000
+  # Test droopy help/syntax
+  python3 /app/droopy --help:
+    exit-status: [0, 1, 2]  # Allow various exit codes for help
+    timeout: 10000
+
+user:
+  droopy:
+    exists: true
+    home: "/app"
+
+port:
+  tcp:8000:
+    listening: false  # Not listening until started

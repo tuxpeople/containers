@@ -1,0 +1,30 @@
+---
+file:
+  /app/app.py:
+    exists: true
+    mode: "0644"
+    owner: "appuser"
+  /app:
+    exists: true
+    filetype: directory
+    owner: "appuser"
+
+command:
+  python3 --version:
+    exit-status: 0
+    stdout:
+      - "Python 3"
+    timeout: 5000
+  # Test Python syntax of main app
+  python3 -m py_compile /app/app.py:
+    exit-status: 0
+    timeout: 10000
+
+user:
+  appuser:
+    exists: true
+    home: "/app"
+
+port:
+  tcp:8080:
+    listening: false  # Not listening until started
