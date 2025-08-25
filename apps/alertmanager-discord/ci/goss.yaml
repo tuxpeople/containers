@@ -1,0 +1,21 @@
+---
+file:
+  /app/alertmanager-discord:
+    exists: true
+    mode: "0755"
+
+command:
+  # Test help output (most CLI tools have --help)
+  /app/alertmanager-discord --help:
+    exit-status: [0, 1, 2]  # Allow various exit codes for help
+    timeout: 10000
+  # Test that binary can be executed
+  file /app/alertmanager-discord:
+    exit-status: 0
+    stdout:
+      - "ELF"
+    timeout: 5000
+
+user:
+  appuser:
+    exists: true

@@ -1,0 +1,24 @@
+---
+file:
+  /usr/local/bin/curl:
+    exists: true
+    mode: "0755"
+
+command:
+  curl --version:
+    exit-status: 0
+    stdout:
+      - "curl"
+      - "libcurl"
+    timeout: 5000
+  curl --help:
+    exit-status: 0
+    stdout:
+      - "Usage: curl"
+    timeout: 5000
+  # Test basic functionality
+  curl -s -o /dev/null -w "%{http_code}" https://httpbin.org/get:
+    exit-status: 0
+    stdout:
+      - "200"
+    timeout: 30000
