@@ -1,7 +1,7 @@
 ---
 app: openvpn
 base: false
-semantic_versioning: false
+semantic_versioning: true
 channels:
   - name: main
     platforms: ["linux/amd64", "linux/arm64"]
