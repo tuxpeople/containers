@@ -312,6 +312,49 @@ COMMIT_COUNT=$(git rev-list --count HEAD -- apps/APP_NAME/)
 version="1.0.${COMMIT_COUNT}"
 ```
 
+### Automated Dependency Updates
+
+This repository uses Renovate bot for automated dependency management:
+
+#### Fallback Version Management
+Version detection scripts include fallback mechanisms with Renovate automation:
+
+**GitHub Repositories:**
+```bash
+# Fallback if API call fails
+if [[ -z "$version" || "$version" == "null" ]]; then
+  # renovate: fallback-version=owner/repo
+  version="v1.2.3"  # Last known good version
+fi
+```
+
+**GitLab Repositories:**
+```bash
+# Fallback if API call fails
+if [[ -z "$version" || "$version" == "null" ]]; then
+  # renovate: fallback-version=gitlab:owner/repo
+  version="v1.2.3"  # Last known good version
+fi
+```
+
+#### Renovate Configuration
+The `renovate.json` file includes custom managers for:
+1. **Standard version variables**: Updates `VERSION=x.y.z` annotations
+2. **GitHub fallback versions**: Updates fallback versions in `latest.sh` scripts
+3. **GitLab fallback versions**: Updates GitLab-hosted fallback versions
+
+Renovate automatically:
+- Detects version updates in upstream repositories
+- Updates fallback versions to prevent build failures
+- Creates PRs with version bumps
+- Supports both GitHub and GitLab data sources
+
+#### Dependency Update Strategy
+- **Patch updates**: Auto-merge enabled for low-risk updates
+- **Minor/major updates**: Manual review required
+- **Fallback versions**: Automatically updated to latest stable releases
+- **Dependency dashboard**: Provides overview of all pending updates
+
 ### Best Practices
 - Use multi-stage Dockerfiles for smaller images
 - Implement proper signal handling in applications
@@ -320,3 +363,5 @@ version="1.0.${COMMIT_COUNT}"
 - Document configuration requirements
 - Test cross-platform compatibility
 - Add fallbacks for API failures in version detection scripts
+- Include Renovate annotations for automatic fallback updates
+- Prefer GitLab API for better rate limits when possible
