@@ -214,6 +214,7 @@ All applications expecting persistent configuration use `/config` as the hardcod
 
 2. **API Rate Limits**
    - GitHub API calls may be rate limited
+   - GitLab API calls are generally more permissive
    - Use authentication tokens when possible
    - Implement retry logic with backoff
 
@@ -260,8 +261,11 @@ channels:
 ### Semantic Versioning
 When `semantic_versioning: true`, additional tags are created:
 - `1.2.3` (full version)
-- `1.2` (minor version)
+- `1.2` (minor version)  
 - `1` (major version)
+
+**Important:** Only enable for applications with true semantic versions (x.y.z format).
+Applications using git hashes (`git-a1b2c3d`) or date formats (`d20250825`) should use `semantic_versioning: false`.
 
 ## Development Guidelines
 
@@ -273,6 +277,41 @@ When `semantic_versioning: true`, additional tags are created:
 5. Optional: Add Goss tests
 6. Test locally before submitting PR
 
+### Upstream Monitoring
+For applications that are forks/rebuilds of existing projects:
+1. **Create upstream monitoring** workflow (see docker-openvpn example)
+2. **Configure GitLab/GitHub API** access for version detection
+3. **Set up automatic issue creation** for upstream changes
+4. **Document upstream relationship** in Dockerfile comments
+
+### Mission Statement Compliance
+Ensure all containers follow the mission statement requirements:
+- **Base Images**: Use only Alpine Linux or Ubuntu
+- **Rootless**: Always run as non-root user (add USER directive)
+- **Multi-Architecture**: Support `["linux/amd64", "linux/arm64"]`
+- **Semantic Versioning**: Enable when upstream uses semantic versions
+- **KISS Principle**: Avoid complex init systems like s6-overlay
+- **Single Process**: One main process per container
+
+### Version Detection Patterns
+Common patterns for `ci/latest.sh` scripts:
+
+**GitHub Releases:**
+```bash
+version=$(curl -sX GET "https://api.github.com/repos/owner/repo/releases/latest" | jq -r '.tag_name' | sed 's/^v//')
+```
+
+**GitLab Tags:**
+```bash
+version=$(curl -sX GET "https://gitlab.com/api/v4/projects/PROJECT_ID/repository/tags" | jq -r '.[0].name' | sed 's/^v//')
+```
+
+**Git Commit Count (for own projects):**
+```bash
+COMMIT_COUNT=$(git rev-list --count HEAD -- apps/APP_NAME/)
+version="1.0.${COMMIT_COUNT}"
+```
+
 ### Best Practices
 - Use multi-stage Dockerfiles for smaller images
 - Implement proper signal handling in applications
@@ -280,3 +319,4 @@ When `semantic_versioning: true`, additional tags are created:
 - Follow semantic versioning for stable applications
 - Document configuration requirements
 - Test cross-platform compatibility
+- Add fallbacks for API failures in version detection scripts
