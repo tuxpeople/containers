@@ -1,6 +1,7 @@
 ---
 app: alertmanager-discord
 base: false
+semantic_versioning: false
 channels:
   - name: main
     platforms: ["linux/amd64", "linux/arm64"]
