@@ -100,9 +100,11 @@ def get_image_metadata(subdir, meta, forRelease=False, force=False, channels=Non
         toBuild["version"] = version
 
         # Image Tags
-        toBuild["tags"] = ["rolling", version]
+        # Sanitize version tag for Docker compatibility (replace + with -)
+        sanitized_version = version.replace('+', '-')
+        toBuild["tags"] = ["rolling", sanitized_version]
         if meta.get("semantic_versioning", False):
-            parts = version.split(".")[:-1]
+            parts = sanitized_version.split(".")[:-1]
             while len(parts) > 0:
                 toBuild["tags"].append(".".join(parts))
                 parts = parts[:-1]
