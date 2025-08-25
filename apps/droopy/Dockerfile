@@ -2,6 +2,8 @@ FROM registry.access.redhat.com/ubi9/python-311:9.6-1755749751
 
 COPY ./apps/droopy/root/ /
 
+User 0
+
 # Download and verify droopy script as root, then switch to non-root user
 RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-security/droopy -o /tmp/droopy && \
   # Verify the download succeeded and has reasonable content
