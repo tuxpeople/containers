@@ -1,8 +1,12 @@
-FROM registry.access.redhat.com/ubi9/python-311:9.6-1755749751
+FROM python:3.13-alpine
 
 COPY ./apps/droopy/root/ /
 
-User 0
+# Create non-root user and app directory
+RUN addgroup -S droopy && \
+    adduser -S -h /app -D -s /bin/false droopy -G droopy && \
+    mkdir -p /app /uploads && \
+    chown -R droopy:droopy /app /uploads
 
 # Download and verify droopy script as root, then switch to non-root user
 RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-security/droopy -o /tmp/droopy && \
@@ -11,9 +15,9 @@ RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-secur
   [ $(wc -l < /tmp/droopy) -gt 10 ] && \
   chmod 755 /tmp/droopy && \
   mv /tmp/droopy /app/droopy && \
-  chown -R 1001:0 ./
+  chown -R droopy:droopy /app /uploads
 
-USER 1001
+USER droopy
 
 WORKDIR /app
 
