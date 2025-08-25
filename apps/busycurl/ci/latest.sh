@@ -8,6 +8,7 @@ CURL_VERSION=$(curl -sX GET https://api.github.com/repos/curl/curl/releases/late
 
 # Fallback if API call fails
 if [[ -z "$CURL_VERSION" || "$CURL_VERSION" == "null" ]]; then
+  # renovate: fallback-version=curl/curl
   CURL_VERSION="8.11.0"  # Last known good version
 fi
 

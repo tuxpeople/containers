@@ -25,6 +25,16 @@
         "#\\s*renovate:\\s*datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s(?:ARG\\s+)?[A-Za-z0-9_]*_VERSION=(?<currentValue>.*)"
       ],
       "versioningTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Update fallback versions in latest.sh scripts",
+      "fileMatch": ["^apps/.*/ci/latest\\.sh$"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*fallback-version=(?<depName>[^\\s]+)\\s*\\n.*?version=\"(?<currentValue>[^\"]+)\"\\s*#\\s*Last known good version"
+      ],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
     }
   ],
   "packageRules": [
