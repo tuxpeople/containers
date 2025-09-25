@@ -54,7 +54,7 @@
         "patch"
       ],
       "automerge": true,
-      "automergeType": "pr",
+      "automergeType": "pr"
     }
   ]
 }
