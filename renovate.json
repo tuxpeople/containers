@@ -29,7 +29,9 @@
     {
       "customType": "regex",
       "description": "Update GitHub fallback versions in latest.sh scripts",
-      "fileMatch": ["^apps/.*/ci/latest\\.sh$"],
+      "managerFilePatterns": [
+        "/^apps/.*/ci/latest\\.sh$/"
+      ],
       "matchStrings": [
         "#\\s*renovate:\\s*fallback-version=(?<depName>[^\\s]+)\\s*\\n.*?version=\"(?<currentValue>[^\"]+)\"\\s*#\\s*Last known good version"
       ],
@@ -37,9 +39,11 @@
       "versioningTemplate": "semver"
     },
     {
-      "customType": "regex", 
+      "customType": "regex",
       "description": "Update GitLab fallback versions in latest.sh scripts",
-      "fileMatch": ["^apps/.*/ci/latest\\.sh$"],
+      "managerFilePatterns": [
+        "/^apps/.*/ci/latest\\.sh$/"
+      ],
       "matchStrings": [
         "#\\s*renovate:\\s*fallback-version=gitlab:(?<depName>[^\\s]+)\\s*\\n.*?version=\"(?<currentValue>[^\"]+)\"\\s*#\\s*Last known good version"
       ],
