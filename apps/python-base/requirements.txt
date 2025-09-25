@@ -1,0 +1,29 @@
+# HTTP und Web
+requests
+aiohttp
+fastapi
+flask
+
+# Datenverarbeitung und Wissenschaft
+pandas
+numpy
+scipy
+matplotlib
+
+# Datenbank
+sqlalchemy
+
+# Parsing und Templates
+beautifulsoup4
+pyyaml
+jinja2
+
+# Kubernetes und Container
+kubernetes
+
+# CLI und Utilities
+click
+python-dateutil
+
+# Testing
+pytest
