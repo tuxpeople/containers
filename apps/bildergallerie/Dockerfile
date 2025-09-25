@@ -1,21 +1,13 @@
-FROM python:3.13-alpine
-
-# Create non-root user
-RUN addgroup -S appuser && \
-    adduser -S -h /app -D -s /bin/false appuser -G appuser
+FROM cgr.dev/chainguard/python:latest
 
 WORKDIR /app
 
-# Install dependencies as root
+# Copy requirements and install dependencies
 COPY ./apps/bildergallerie/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application files and change ownership
+# Copy application files
 COPY ./apps/bildergallerie .
-RUN chown -R appuser:appuser /app
-
-# Switch to non-root user
-USER appuser
 
 EXPOSE 8080
 CMD ["python", "app.py"]
