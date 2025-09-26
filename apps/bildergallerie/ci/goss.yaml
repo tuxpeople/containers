@@ -3,27 +3,28 @@ file:
   /app/app.py:
     exists: true
     mode: "0644"
-    owner: "appuser"
+    owner: "nonroot"
   /app:
     exists: true
     filetype: directory
-    owner: "appuser"
+    owner: "nonroot"
 
 command:
-  python3 --version:
+  python --version:
     exit-status: 0
     stdout:
       - "Python 3"
     timeout: 5000
   # Test Python syntax of main app
-  python3 -m py_compile /app/app.py:
+  python -m py_compile /app/app.py:
     exit-status: 0
     timeout: 10000
 
 user:
-  appuser:
+  nonroot:
     exists: true
-    home: "/app"
+    uid: 65532
+    home: "/home/nonroot"
 
 port:
   tcp:8080:
