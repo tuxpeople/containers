@@ -37,10 +37,6 @@ mkdocs
 mkdocs-material
 mkdocs-material-extensions
 netaddr
-nsx-policy-python-sdk
-nsx-python-sdk
-nsx-vmc-aws-integration-python-sdk
-nsx-vmc-policy-python-sdk
 numpy
 openai-whisper
 openpyxl
