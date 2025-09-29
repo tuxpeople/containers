@@ -1,80 +1,74 @@
-aiohttp
-ansible
-ansible-cmdb
-azure-cli
-bcrypt
-beautifulsoup4
-cachetools
-click
-cloudflare
-cryptography
-email-validator
-extract-msg
-fastapi
-feedgen
-feedparser
-ffmpeg-python
-flask
-flask-bcrypt
-flask-httpauth
-flask-limiter
-flask-login
-flask-menu
-ghp-import
-gunicorn
-importlib-metadata
-jinja2
-jmespath
-kr8s
-kubernetes
-lxml
-makejinja
-markdown
-markupsafe
-matplotlib
-mergedeep
-mkdocs
-mkdocs-material
-mkdocs-material-extensions
-netaddr
-numpy
-openai-whisper
-openpyxl
-openshift
-packaging
-pandas
-paramiko
-pdfminer.six
-pdfplumber
-pexpect
-prompt-toolkit
-pygments
-pymdown-extensions
-pyopenssl
-pyparsing
-pytest
-python-dateutil
-python-docx
-python-dotenv
-python-markdown-math
-python-pptx
-pyVmomi
-pywinrm
-pywinrm[kerberos]
-pyyaml
-pyyaml-env-tag
-requests
-scipy
-setuptools
-six
-sqlalchemy
-timeloop
-torch
-torchaudio
-vmware-vcenter
-vmwarecloud-aws
-vmwarecloud-draas
-watchdog
-wcwidth
-Werkzeug
-zipp
+# Base packages - essentiell
+aiohttp  # HTTP Client/Server für async Operations
+bcrypt  # Password Hashing und Verschlüsselung
+beautifulsoup4  # HTML/XML Parsing
+cachetools  # Caching-Utilities und Decorators
+click  # CLI-Framework für Command Line Apps
+cryptography  # Kryptographische Funktionen
+email-validator  # E-Mail-Adress-Validierung
+extract-msg  # Outlook MSG-Dateien extrahieren
+fastapi  # Moderne Web API Framework
+feedgen  # RSS/Atom Feed Generation
+feedparser  # RSS/Atom Feed Parsing
+flask  # Web Framework für APIs/Webapps
+flask-bcrypt  # Password Hashing für Flask
+flask-httpauth  # HTTP Authentication für Flask
+flask-limiter  # Rate Limiting für Flask APIs
+flask-login  # User Session Management für Flask
+flask-menu  # Navigation Menü System für Flask
+gunicorn  # Production WSGI Server
+importlib-metadata  # Package Metadata Access
+jinja2  # Template Engine für HTML/Config
+jmespath  # JSON Query Language
+kubernetes  # Kubernetes API Client
+requests  # HTTP Library für API Calls
+
+# GitLab Enterprise Integration
+python-gitlab  # GitLab API Client
+gitpython  # Git Repository Operations
+pygit2  # Advanced Git Operations (libgit2)
+
+# Erweiterte Pakete - je nach Anwendungsfall
+lxml  # XML/HTML Processing (schneller als BeautifulSoup)
+makejinja  # Jinja2 Template CLI Tool
+markdown  # Markdown zu HTML Konvertierung
+markupsafe  # Sichere String-Behandlung für Templates
+matplotlib  # Diagramme und Datenvisualisierung
+mergedeep  # Deep Dictionary/List Merging
+mkdocs  # Dokumentations-Generator
+mkdocs-material  # Material Design Theme für MkDocs
+mkdocs-material-extensions  # Erweiterte MkDocs Features
+netaddr  # IP Address/Network Manipulation
+numpy  # Numerische Berechnungen und Arrays
+openpyxl  # Excel-Dateien lesen/schreiben (xlsx)
+packaging  # Package Version Handling
+pandas  # Datenanalyse und Excel/CSV Processing
+paramiko  # SSH Client für Remote Operations
+pdfminer.six  # PDF Text Extraction
+pdfplumber  # PDF Data Extraction (Tabellen etc.)
+pexpect  # Subprocess Automation mit Expect
+prompt-toolkit  # Interactive CLI Applications
+pygments  # Syntax Highlighting
+pymdown-extensions  # Markdown Extensions
+pyopenssl  # OpenSSL Wrapper für Python
+pyparsing  # Text Parsing Framework
+pytest  # Testing Framework
+python-dateutil  # Erweiterte Datum/Zeit Operationen
+python-docx  # Word-Dokumente (.docx) verarbeiten
+python-dotenv  # Environment Variables aus .env Dateien
+python-markdown-math  # LaTeX Math für Markdown
+python-pptx  # PowerPoint-Präsentationen (.pptx) bearbeiten
+pyVmomi  # VMware vSphere API Client
+pywinrm  # Windows Remote Management
+pyyaml  # YAML Parser/Generator
+pyyaml-env-tag  # Environment Variables in YAML
+scipy  # Scientific Computing und Statistik
+setuptools  # Package Installation/Distribution
+six  # Python 2/3 Compatibility Layer
+sqlalchemy  # Database ORM und SQL Toolkit
+timeloop  # Scheduler für wiederkehrende Tasks
+vmware-vcenter  # VMware vCenter Management API
+watchdog  # Filesystem Event Monitoring
+wcwidth  # Terminal Character Width Calculation
+Werkzeug  # WSGI Utilities (Flask dependency)
+zipp  # Backport von zipfile für ältere Python Versionen
