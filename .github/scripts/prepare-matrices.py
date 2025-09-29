@@ -142,7 +142,8 @@ def get_image_metadata(subdir, meta, forRelease=False, force=False, channels=Non
                 platformToBuild["context"] = subdir
                 platformToBuild["goss_config"] = os.path.join(subdir, "ci", "goss.yaml")
 
-            platformToBuild["goss_args"] = "tail -f /dev/null" if channel["tests"].get("type", "web") == "cli" else ""
+            test_type = channel["tests"].get("type", "web")
+            platformToBuild["goss_args"] = "tail -f /dev/null" if test_type == "cli" else ""
 
             platformToBuild["tests_enabled"] = channel["tests"]["enabled"] and platform in TESTABLE_PLATFORMS
 

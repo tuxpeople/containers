@@ -11,7 +11,7 @@
     stable: bool
     tests: {
         enabled: bool
-        type?:   =~"^(cli|web)$"
+        type?:   =~"^(cli|web|service)$"
     }
 }
 

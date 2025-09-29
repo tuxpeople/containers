@@ -9,17 +9,6 @@ file:
     filetype: directory
     owner: "nonroot"
 
-command:
-  python --version:
-    exit-status: 0
-    stdout:
-      - "Python 3"
-    timeout: 5000
-  # Test Python syntax of main app
-  python -m py_compile /app/app.py:
-    exit-status: 0
-    timeout: 10000
-
 user:
   nonroot:
     exists: true
@@ -28,4 +17,9 @@ user:
 
 port:
   tcp:8080:
-    listening: false  # Not listening until started
+    listening: true  # Service should be listening
+
+http:
+  http://localhost:8080:
+    status: 200
+    timeout: 10000

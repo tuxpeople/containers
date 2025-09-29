@@ -122,6 +122,11 @@ Uses Goss (via dgoss) for container testing:
 - Tests run automatically during `task test`
 - Environment variables control Goss behavior
 
+#### Test Types
+- **`cli`**: Uses `tail -f /dev/null` to keep container alive, then runs command tests. Not compatible with distroless images.
+- **`web`**: Starts container normally, tests HTTP endpoints. Best for web applications.
+- **`service`**: Starts container as service, tests ports/processes. Good for background services.
+
 ## Image Tagging Strategy
 
 Images use semantic versioning with both version-specific and rolling tags:
@@ -286,12 +291,35 @@ For applications that are forks/rebuilds of existing projects:
 
 ### Mission Statement Compliance
 Ensure all containers follow the mission statement requirements:
-- **Base Images**: Use only Alpine Linux or Ubuntu
+- **Base Images**: Prefer Chainguard images, fallback to Alpine Linux or Ubuntu
 - **Rootless**: Always run as non-root user (add USER directive)
 - **Multi-Architecture**: Support `["linux/amd64", "linux/arm64"]`
 - **Semantic Versioning**: Enable when upstream uses semantic versions
 - **KISS Principle**: Avoid complex init systems like s6-overlay
 - **Single Process**: One main process per container
+
+### Base Image Migration Guidelines
+When migrating containers to new base images (especially Chainguard), remember to update ALL related files:
+
+#### Required Updates for Base Image Changes:
+1. **Dockerfile**: Update FROM statements and build processes
+2. **GOSS Tests** (`ci/goss.yaml`): Update user expectations, command paths, file ownership
+   - User names (e.g., `appuser` → `nonroot`)
+   - User IDs (e.g., Chainguard uses UID 65532)
+   - Home directories (e.g., `/app` → `/home/nonroot`)
+   - Command names (e.g., `python3` → `python`)
+3. **Documentation**: Update README files if they reference specific users/paths
+4. **Health Checks**: Update any health check commands if paths changed
+5. **Init Scripts**: Update any custom scripts that reference users or paths
+
+#### Chainguard-Specific Considerations:
+- **Multi-stage builds required**: Use `latest-dev` for building, `latest` for runtime
+- **Standard user**: Always `nonroot` with UID 65532
+- **Virtual environments**: Install to `/home/nonroot/venv`
+- **No shell in runtime**: Distroless images have no `/bin/sh`
+- **Command differences**: Use `python` not `python3`, etc.
+
+**Always test thoroughly after base image migrations** - many issues only surface during container runtime or testing.
 
 ### Version Detection Patterns
 Common patterns for `ci/latest.sh` scripts:
