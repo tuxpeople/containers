@@ -1,0 +1,8 @@
+pyVmomi
+vmware-vcenter
+vmwarecloud-aws
+nsx-python-sdk
+nsx-policy-python-sdk
+nsx-vmc-policy-python-sdk
+nsx-vmc-aws-integration-python-sdk
+vmwarecloud-draas
