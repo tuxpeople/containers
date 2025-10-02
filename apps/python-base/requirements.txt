@@ -4,7 +4,7 @@ bcrypt  # Password Hashing und Verschlüsselung
 beautifulsoup4  # HTML/XML Parsing
 cachetools  # Caching-Utilities und Decorators
 click  # CLI-Framework für Command Line Apps
-cryptography  # Kryptographische Funktionen
+cryptography>=44.0.1  # Kryptographische Funktionen (CVE-2024-12797 fix)
 email-validator  # E-Mail-Adress-Validierung
 extract-msg  # Outlook MSG-Dateien extrahieren
 fastapi  # Moderne Web API Framework
