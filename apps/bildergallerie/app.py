@@ -23,28 +23,19 @@ def get_images(folder):
                 images.append(rel_path.replace('\\', '/'))
     return sorted(images)
 
-def sort_items(items, current_path, sort_by):
-    """Sortiert Bilder und Ordner nach verschiedenen Kriterien"""
+def sort_items(items, _current_path, sort_by):
+    """Sortiert Bilder und Ordner nach Namen auf- oder absteigend"""
     def get_sort_key(item):
-        item_path = os.path.join(IMAGE_FOLDER, current_path, item) if current_path else os.path.join(IMAGE_FOLDER, item)
+        return item.lower()
 
-        if sort_by == 'name':
-            return item.lower()
-        else:  # sort_by == 'date' (Standard)
-            try:
-                return os.path.getctime(item_path)  # Erstellungszeit
-            except (OSError, FileNotFoundError):
-                return 0
-
-    if sort_by == 'date':
-        return sorted(items, key=get_sort_key, reverse=True)  # Neueste zuerst
-    else:
-        return sorted(items, key=get_sort_key)  # Alphabetisch
+    return sorted(items, key=get_sort_key, reverse=(sort_by == 'name_desc'))
 
 @app.route('/')
 @app.route('/<path:subfolder>')
 def gallery(subfolder=''):
-    sort_by = request.args.get('sort', 'date')  # Standard: nach Datum
+    sort_by = request.args.get('sort', 'name_asc')  # Standard: nach Name aufsteigend
+    if sort_by not in {'name_asc', 'name_desc'}:
+        sort_by = 'name_asc'
 
     current_path = os.path.join(IMAGE_FOLDER, subfolder)
     if not os.path.exists(current_path):
