@@ -12,7 +12,7 @@ RUN \
   git checkout tags/v${VERSION}); \
   fi 
 
-FROM python:3.13-alpine
+FROM python:3.14-alpine
 
 WORKDIR /opt/vmware_exporter/
 COPY --from=builder /upstream/ /opt/vmware_exporter/
