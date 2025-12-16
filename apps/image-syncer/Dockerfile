@@ -15,7 +15,7 @@ WORKDIR /go/src/github.com/AliyunContainerService/image-syncer
 RUN wget -nv -O - https://github.com/AliyunContainerService/image-syncer/archive/${UPSTREAM_VERSION}.tar.gz | tar -xz --strip-components=1 && \
     CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} make
 
-FROM docker.io/library/alpine:3.22.2
+FROM docker.io/library/alpine:3.23.0
 WORKDIR /app/
 # hadolint ignore=DL3018,DL3017
 RUN apk --no-cache upgrade && \
