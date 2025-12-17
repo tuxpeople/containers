@@ -8,7 +8,7 @@
     ":semanticCommits"
   ],
   "forkProcessing": "enabled",
-  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "dependencyDashboardTitle": "Renovate Dashboard \ud83e\udd16",
   "suppressNotifications": [
     "prEditedNotification",
     "prIgnoreNotification"
@@ -53,12 +53,20 @@
   ],
   "packageRules": [
     {
-      "description": "Automerge patch updates",
       "matchUpdateTypes": [
-        "patch"
+        "patch",
+        "minor"
       ],
-      "automerge": true,
-      "automergeType": "pr"
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
     }
-  ]
+  ],
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true
 }
