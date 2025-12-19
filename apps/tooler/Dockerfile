@@ -1,4 +1,4 @@
-FROM ghcr.io/tuxpeople/baseimage-alpine-light:v3.22
+FROM ghcr.io/tuxpeople/baseimage-alpine-light:v3.23
 
 RUN \
   apk add --no-cache --upgrade \
