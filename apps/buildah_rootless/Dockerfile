@@ -13,7 +13,7 @@ RUN echo "export BUILDAH_ISOLATION=chroot" >> /home/build/.bashrc
 RUN mkdir -p /home/build/.config/containers \
  && (echo '[storage]';echo 'driver = "vfs"') > /home/build/.config/containers/storage.conf
 
-USER build
+USER 1000
 WORKDIR /home/build
 
 # Just keep the container running, allowing "oc rsh" access
