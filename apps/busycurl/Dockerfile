@@ -6,5 +6,5 @@ COPY ./apps/busycurl/build.sh /build.sh
 COPY ./apps/busycurl/mykey.asc /mykey.asc
 RUN /build.sh
 
-FROM busybox:1.37.0-musl
+FROM busybox:1.38.0-musl
 COPY --from=builder /tmp/release/curl /usr/local/bin/curl
