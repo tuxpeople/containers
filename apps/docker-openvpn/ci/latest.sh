@@ -8,7 +8,7 @@ version=$(curl -sX GET "https://gitlab.com/api/v4/projects/24751406/repository/t
 # Fallback if API call fails
 if [[ -z "$version" || "$version" == "null" ]]; then
   # renovate: fallback-version=gitlab:domrod/docker-openvpn
-  version="2.6.12"  # Last known good version
+  version="2.7.7"  # Last known good version
 fi
 
 version="${version#*v}"
