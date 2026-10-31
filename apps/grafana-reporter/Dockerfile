@@ -20,7 +20,8 @@ WORKDIR /upstream
 
 RUN go install github.com/IzakMarais/reporter/cmd/grafana-reporter@v${VERSION}
 
-FROM leplusorg/latex
+# leplusorg/latex publishes no version tags; pin the digest so Renovate proposes updates
+FROM leplusorg/latex:latest@sha256:f3233d008bf8413fc8ae843818255bdada0182be34d75f2875665eb66c879b67
 
 # Baseimage already has an unpriviledged user
 

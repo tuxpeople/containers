@@ -1,4 +1,4 @@
-FROM alpine:latest AS downloader
+FROM alpine:3.24 AS downloader
 
 ARG VERSION
 ARG TARGETOS
