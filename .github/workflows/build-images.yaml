@@ -161,11 +161,27 @@ jobs:
           username: "${{ github.actor }}"
           password: "${{ secrets.GITHUB_TOKEN }}"
 
+      # goss v0.4.10 switched to tarball release assets, which
+      # e1himself/goss-installation-action cannot download.
       - name: Setup Goss
         if: ${{ matrix.image.tests_enabled }}
-        uses: e1himself/goss-installation-action@8c646222c1cb43528392161394b745cb5d28e8f9 # v1
-        with:
-          version: latest
+        env:
+          # renovate: datasource=github-releases depName=goss-org/goss
+          GOSS_VERSION: v0.4.10
+        shell: bash
+        run: |
+          base="https://github.com/goss-org/goss/releases/download/${GOSS_VERSION}"
+          archive="goss_${GOSS_VERSION#v}_linux_x86_64.tar.gz"
+          cd "${RUNNER_TEMP}"
+          curl -fsSLO "${base}/${archive}"
+          curl -fsSLO "${base}/goss_${GOSS_VERSION#v}_SHA256SUMS"
+          sha256sum --check --ignore-missing "goss_${GOSS_VERSION#v}_SHA256SUMS"
+          curl -fsSLO "${base}/dgoss"
+          curl -fsSLO "${base}/dgoss.sha256"
+          sha256sum --check dgoss.sha256
+          tar -xzf "${archive}" goss
+          sudo install -m 0755 goss dgoss /usr/local/bin/
+          goss --version
 
       - name: Prepare Build Outputs
         id: prepare-build-outputs
@@ -196,8 +212,10 @@ jobs:
           outputs: ${{ steps.prepare-build-outputs.outputs.outputs }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          provenance: true
-          sbom: true
+          # Attestations turn the result into an image index, which the docker
+          # exporter used for unpushed (PR) builds cannot load
+          provenance: ${{ inputs.pushImages }}
+          sbom: ${{ inputs.pushImages }}
           labels: |-
             org.opencontainers.image.title=${{ matrix.image.name }}
             org.opencontainers.image.url=https://ghcr.io/${{ env.LOWERCASE_REPO_OWNER }}/${{ matrix.image.name }}
