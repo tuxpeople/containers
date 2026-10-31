@@ -28,7 +28,7 @@ on:
 jobs:
   simple-checks:
     name: Simple Checks
-    uses: tuxpeople/containers/.github/workflows/simple-checks.yaml@main
+    uses: ./.github/workflows/simple-checks.yaml
 
   build-images:
     name: Build Images

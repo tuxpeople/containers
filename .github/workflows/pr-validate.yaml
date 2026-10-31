@@ -16,10 +16,10 @@ concurrency:
 
 jobs:
   simple-checks:
-    uses: tuxpeople/containers/.github/workflows/simple-checks.yaml@main
+    uses: ./.github/workflows/simple-checks.yaml
 
   get-changed-images:
-    uses: tuxpeople/containers/.github/workflows/get-changed-images.yaml@main
+    uses: ./.github/workflows/get-changed-images.yaml
 
   build-images:
     needs: ["simple-checks", "get-changed-images"]
