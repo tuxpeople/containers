@@ -7,5 +7,6 @@ channels:
     platforms: ["linux/amd64", "linux/arm64"]
     stable: true
     tests:
-      enabled: true
+      # dgoss needs a shell inside the container, and this image is FROM scratch
+      enabled: false
       type: cli

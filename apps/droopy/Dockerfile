@@ -8,14 +8,16 @@ RUN addgroup -S droopy && \
     mkdir -p /app /uploads && \
     chown -R droopy:droopy /app /uploads
 
-# Download and verify droopy script as root, then switch to non-root user
-RUN curl -fsSL https://raw.githubusercontent.com/gurnec/Droopy/improve-ssl-security/droopy -o /tmp/droopy && \
-  # Verify the download succeeded and has reasonable content
-  [ -s /tmp/droopy ] && \
-  [ $(wc -l < /tmp/droopy) -gt 10 ] && \
-  chmod 755 /tmp/droopy && \
-  mv /tmp/droopy /app/droopy && \
-  chown -R droopy:droopy /app /uploads
+# Upstream has not changed this branch since 2023; pin the commit so the
+# build is reproducible (python:alpine has no curl anyway)
+ADD --chmod=755 --chown=droopy:droopy \
+    https://raw.githubusercontent.com/gurnec/Droopy/4aec4b2e8464c3466cc4d85a1ecf0fc248dc2cce/droopy \
+    /app/droopy
+
+# Python 3.13 removed the cgi module that droopy still imports
+# renovate: datasource=pypi depName=legacy-cgi
+ARG LEGACY_CGI_VERSION=2.6.4
+RUN pip install --no-cache-dir "legacy-cgi==${LEGACY_CGI_VERSION}"
 
 USER droopy
 
