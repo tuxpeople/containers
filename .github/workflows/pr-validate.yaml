@@ -24,7 +24,7 @@ jobs:
   build-images:
     needs: ["simple-checks", "get-changed-images"]
     if: ${{ needs.get-changed-images.outputs.addedOrModified == 'true' }}
-    uses: tuxpeople/containers/.github/workflows/build-images.yaml@main
+    uses: ./.github/workflows/build-images.yaml
     secrets:
       BOT_APP_ID: ${{ secrets.BOT_APP_ID }}
       BOT_APP_PRIVATE_KEY: ${{ secrets.BOT_APP_PRIVATE_KEY }}
