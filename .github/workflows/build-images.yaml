@@ -212,8 +212,10 @@ jobs:
           outputs: ${{ steps.prepare-build-outputs.outputs.outputs }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          provenance: true
-          sbom: true
+          # Attestations turn the result into an image index, which the docker
+          # exporter used for unpushed (PR) builds cannot load
+          provenance: ${{ inputs.pushImages }}
+          sbom: ${{ inputs.pushImages }}
           labels: |-
             org.opencontainers.image.title=${{ matrix.image.name }}
             org.opencontainers.image.url=https://ghcr.io/${{ env.LOWERCASE_REPO_OWNER }}/${{ matrix.image.name }}
