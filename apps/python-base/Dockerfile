@@ -2,7 +2,7 @@
 # Includes pip, build tools, and everything needed for building Python packages
 # Chainguard only publishes `latest` tags for free; pin the digest so Renovate
 # proposes base image updates as PRs that have to pass CI.
-FROM cgr.dev/chainguard/python:latest-dev@sha256:157a562dbc225a2a9039dbd8249cbf704202260ba27bf525f24e47a3a685050f AS build
+FROM cgr.dev/chainguard/python:latest-dev@sha256:8a5780972067cfba4592b10e786a889807ed876c1100f89410fd0ed4e398992c AS build
 # pygit2 has no wheels for every Python release, so build it against Wolfi's libgit2
 USER root
 RUN apk add --no-cache libgit2-dev
