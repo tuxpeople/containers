@@ -16,7 +16,7 @@ COPY ./apps/python-base/requirements.txt /requirements.txt
 RUN /home/nonroot/venv/bin/pip install --disable-pip-version-check -r /requirements.txt
 
 # Copy the virtualenv into minimal Chainguard Python runtime image
-FROM cgr.dev/chainguard/python:latest@sha256:35d6025b288eb1c40ae631db77ed6cdd26c6f51d898428d8fc9989db7f29e784
+FROM cgr.dev/chainguard/python:latest@sha256:60e3c0d33ab77e50ace0850ccdf6eaec825ce89dad9b1ec2b0300a2070892b05
 # libgit2 and the libraries it needs that the runtime image does not ship
 COPY --from=build-venv /usr/lib/libgit2.so* /usr/lib/libpcre2-8.so* /usr/lib/libssh2.so* /usr/lib/
 COPY --from=build-venv /home/nonroot/venv /home/nonroot/venv
