@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # renovate: datasource=docker depName=library/busybox
-BUSYBOX_VERSION=1.37.0-musl
+BUSYBOX_VERSION=1.38.0-musl
 
 # r e n o v a t e: datasource=github-releases depName=curl/curl
 CURL_VERSION=$(curl -sX GET https://api.github.com/repos/curl/curl/releases/latest | jq -r .name 2>/dev/null)
