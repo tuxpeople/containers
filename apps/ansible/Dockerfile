@@ -1,5 +1,5 @@
 # based on https://4sysops.com/archives/how-to-deploy-ansible-inside-a-docker-container/
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
