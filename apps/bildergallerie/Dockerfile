@@ -11,7 +11,7 @@ RUN python -m venv /home/nonroot/venv && \
     /home/nonroot/venv/bin/pip install --no-cache-dir -r requirements.txt
 
 # Runtime stage with minimal image
-FROM cgr.dev/chainguard/python:latest@sha256:1cd5d9ebc11ac60b133b1fc6bbfa9631c5156cf6334902d721b1e87160be3f20
+FROM cgr.dev/chainguard/python:latest@sha256:31dd69d84fe5235fe18f8ceb5b76620e6f44a0ce1f9b0d3a46c491576f8b453b
 
 WORKDIR /app
 
