@@ -18,7 +18,7 @@ RUN /venv/bin/pip install --disable-pip-version-check -r /requirements.txt
 # Copy the virtualenv into a distroless image
 # Must match the Debian release of the build stage: the venv is built with
 # Debian 13's Python 3.13 and does not run on debian11's Python 3.9
-FROM gcr.io/distroless/python3-debian13:latest@sha256:0db804f397ca31a1498c9d94c3c1df53fe49ac8007e5942b1cb547c1c3355c09
+FROM gcr.io/distroless/python3-debian13:latest@sha256:9a1ed29d41d7695245ff86bc2e08684d3dd253a3f9c8ca45677427f9f4fe3598
 COPY --from=build-venv /venv /venv
 COPY ./apps/feeder/app /app
 WORKDIR /app/out
