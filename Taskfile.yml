@@ -29,7 +29,11 @@ tasks:
         {{end}}
         -f ./apps/{{.APP}}/Dockerfile .
       - >-
-        ./.goss/dgoss run {{.APP}}:{{.CHANNEL}} {{if eq .BASE "true"}}tail -f /dev/null{{end}}
+        if [ "$(jq -r '.channels[] | select(.name=="{{.CHANNEL}}").tests.enabled' ./apps/{{.APP}}/metadata.json)" != "true" ]; then
+          echo "Tests disabled for {{.APP}}/{{.CHANNEL}} in metadata, skipping dgoss";
+        else
+          ./.goss/dgoss run {{.APP}}:{{.CHANNEL}} {{if eq .BASE "true"}}tail -f /dev/null{{end}};
+        fi
     env:
       CONTAINER_RUNTIME: docker
       GOSS_PATH: ./.goss/goss
