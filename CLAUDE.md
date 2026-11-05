@@ -284,7 +284,7 @@ Applications using git hashes (`git-a1b2c3d`) or date formats (`d20250825`) shou
 
 ### Upstream Monitoring
 For applications that are forks/rebuilds of existing projects:
-1. **Create upstream monitoring** workflow (see docker-openvpn example)
+1. **Create upstream monitoring** workflow (e.g. a scheduled workflow that compares upstream releases and opens an issue)
 2. **Configure GitLab/GitHub API** access for version detection
 3. **Set up automatic issue creation** for upstream changes
 4. **Document upstream relationship** in Dockerfile comments

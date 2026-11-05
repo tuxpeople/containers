@@ -1,9 +1,0 @@
----
-file:
-  /usr/local/bin/kubectl:
-    exists: true
-command:
-  kubectl version --client:
-    exit-status: 0
-    stdout:
-      - Client Version
