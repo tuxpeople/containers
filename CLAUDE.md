@@ -1,5 +1,12 @@
 # CLAUDE.md
 
+> **This repository is retired (2026-11-05).** All images moved:
+> - Third-party software: [tuxpeople/oci-containers](https://github.com/tuxpeople/oci-containers) (ansible, imgpkg, tinysyslog, busycurl, tcp-proxy, buildah_rootless)
+> - Own applications: [bildergallerie](https://github.com/tuxpeople/bildergallerie), [s3-backup-restore](https://github.com/tuxpeople/s3-backup-restore), [feeder](https://github.com/tuxpeople/feeder), [tooler](https://github.com/tuxpeople/tooler)
+> - New apps start from [tuxpeople/template-python-app](https://github.com/tuxpeople/template-python-app)
+>
+> Do not add new images here.
+
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Repository Overview
@@ -35,11 +42,10 @@ Images are published to GitHub Container Registry (ghcr.io) under the repository
 # Test a specific application and channel
 task APP=<app-name> CHANNEL=<channel-name> test
 
-# Example: Test feeder container on main channel
-task APP=feeder CHANNEL=main test
+task APP=<app-name> CHANNEL=main test
 
 # Test with multiplatform build
-task APP=feeder CHANNEL=main MULTIPLATFORM=true test
+task APP=<app-name> CHANNEL=main MULTIPLATFORM=true test
 ```
 
 ### Container Validation
