@@ -63,6 +63,11 @@ def get_published_version(image_name):
         tags = image["metadata"]["container"]["tags"]
         if "rolling" in tags:
             tags.remove("rolling")
+            # rolling can be left without a version tag if another build moved
+            # them away; treat the version as unknown instead of crashing
+            if not tags:
+                print(f"Warning: rolling tag of {image_name} has no version tag", file=sys.stderr)
+                return None
             # Assume the longest string is the complete version number
             return max(tags, key=len)
 
