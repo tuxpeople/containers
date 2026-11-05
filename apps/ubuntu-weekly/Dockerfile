@@ -1,4 +1,4 @@
-FROM ubuntu:noble-20261024.1
+FROM ubuntu:26.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
