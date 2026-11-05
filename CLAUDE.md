@@ -35,11 +35,11 @@ Images are published to GitHub Container Registry (ghcr.io) under the repository
 # Test a specific application and channel
 task APP=<app-name> CHANNEL=<channel-name> test
 
-# Example: Test ansible container on main channel
-task APP=ansible CHANNEL=main test
+# Example: Test busycurl container on main channel
+task APP=busycurl CHANNEL=main test
 
 # Test with multiplatform build
-task APP=ansible CHANNEL=main MULTIPLATFORM=true test
+task APP=busycurl CHANNEL=main MULTIPLATFORM=true test
 ```
 
 ### Container Validation
