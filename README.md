@@ -67,9 +67,7 @@ Each Image will be built with a `rolling` tag, along with tags specific to it's 
 
 Container | Channel | Image | Latest Tags
 --- | --- | --- | ---
-[feeder](https://github.com/tuxpeople/containers/pkgs/container/feeder) | main | registry.eighty-three.me/tuxpeople/feeder |![0](https://img.shields.io/badge/0-blue?style=flat-square) ![0.0](https://img.shields.io/badge/0.0-blue?style=flat-square) ![0.0.1](https://img.shields.io/badge/0.0.1-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 [openvpn](https://github.com/tuxpeople/containers/pkgs/container/openvpn) | main | registry.eighty-three.me/tuxpeople/openvpn |![latest](https://img.shields.io/badge/latest-green?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
-[tooler](https://github.com/tuxpeople/containers/pkgs/container/tooler) | main | registry.eighty-three.me/tuxpeople/tooler |![git-bcdae03](https://img.shields.io/badge/git--bcdae03-blue?style=flat-square) ![rolling](https://img.shields.io/badge/rolling-blue?style=flat-square)
 
 
 ## Contributing
